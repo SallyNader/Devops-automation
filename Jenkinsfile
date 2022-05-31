@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh """
                   cd ${workspace}/terraform
-                  echo ${workspace}
+                  echo "$PWD"
                   terraform init
                 """
             }
