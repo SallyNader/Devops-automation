@@ -14,11 +14,14 @@ pipeline {
 
         stage('terraform init') {
             steps {
-                sh """
-                  cd ${workspace}/terraform
+                dir("${workspace}/terraform") {
+                    sh """
+                  
                   echo "$PWD"
                   terraform init
                 """
+                }
+                
             }
         }
 
