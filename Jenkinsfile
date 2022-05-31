@@ -1,6 +1,9 @@
 // Runs terraform to create EC2 instance.
 pipeline {
     agent any
+      environment {
+        workspace = "${env.WORKSPACE}"
+    }
 
     stages {
         stage('checkout') {
@@ -13,7 +16,7 @@ pipeline {
             steps {
                 sh """
                   cd terraform
-                  echo "$PWD"
+                  echo ${workspace}
                   terraform init
                 """
             }
