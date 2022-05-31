@@ -9,7 +9,7 @@ resource "aws_instance" "linux" {
 }
 
 resource "aws_security_group" "linux" {
-  name        = "Allow web traffic"
+  name        = "Linux Allow web traffic"
   description = "Allow Web inbound and outbound traffic"
 
   ingress {
