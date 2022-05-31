@@ -1,5 +1,5 @@
 // Runs terraform to create EC2 instance.
-pipleline {
+pipeline {
     agent any
 
     stages {
@@ -11,10 +11,14 @@ pipleline {
 
         stage('terraform init') {
             steps {
+
+                dir("terraform") {
                 sh """
-                  cd terraform
+                  echo "$PWD"
                   terraform init
                 """
+                }
+               
             }
         }
 
@@ -22,10 +26,13 @@ pipleline {
             steps {
 
                 withCredentials([usernamePassword(credentialsId: 'aws', passwordVariable: 'aws_secret_key', usernameVariable: 'aws_access_key')]) {
-                  sh """
-                    cd terraform
-                    terraform apply -var='aws_access_key=${aws_access_key}' -var='aws_secret_key=${aws_secret_key}' -auto-approve 
-                  """
+                     dir("terraform") {
+                          sh """
+                             echo "$PWD"
+                             terraform apply -var='aws_access_key=${aws_access_key}' -var='aws_secret_key=${aws_secret_key}' -auto-approve 
+                          """
+                     }
+                 
                 }
                 
             }
