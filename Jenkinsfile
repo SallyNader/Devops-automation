@@ -29,7 +29,7 @@ pipeline {
             steps {
 
                 withCredentials([usernamePassword(credentialsId: 'aws', passwordVariable: 'aws_secret_key', usernameVariable: 'aws_access_key')]) {
-                    dir("terraform") {
+                    dir("terraform/EC2") {
                          sh """
                    
                     echo "$PWD"
