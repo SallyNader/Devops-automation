@@ -1,12 +1,12 @@
 resource "aws_instance" "jenkins" {
-  ami           = "ami-0022f774911c1d690"
-  instance_type = "t2.micro"
+  ami                    = "ami-0022f774911c1d690"
+  instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web.id]
-  user_data     = file("../bash/install-jenkins.sh")
+  user_data              = file("../bash/install-jenkins.sh")
   tags = {
     name = "jenkins"
   }
-  key_name               = aws_key_pair.key.id 
+  key_name = aws_key_pair.key.id
 }
 
 
@@ -40,15 +40,15 @@ resource "aws_security_group" "web" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-  
+
   ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port        = 8080
+    to_port          = 8080
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-  
+
   egress {
     from_port        = 0
     to_port          = 0
