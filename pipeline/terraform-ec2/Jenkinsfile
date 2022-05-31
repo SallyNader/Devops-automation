@@ -1,6 +1,9 @@
 // Runs terraform to create EC2 instance.
 pipeline {
     agent any
+      environment {
+        workspace = "${env.WORKSPACE}"
+    }
 
     stages {
         stage('checkout') {
@@ -11,10 +14,14 @@ pipeline {
 
         stage('terraform init') {
             steps {
-                sh """
-                  cd terraform
+                dir("terraform") {
+                    sh """
+                  
+                  echo "$PWD"
                   terraform init
                 """
+                }
+                
             }
         }
 
@@ -22,10 +29,14 @@ pipeline {
             steps {
 
                 withCredentials([usernamePassword(credentialsId: 'aws', passwordVariable: 'aws_secret_key', usernameVariable: 'aws_access_key')]) {
-                  sh """
-                    cd terraform
+                    dir("terraform") {
+                         sh """
+                   
+                    echo "$PWD"
                     terraform apply -var='aws_access_key=${aws_access_key}' -var='aws_secret_key=${aws_secret_key}' -auto-approve 
                   """
+                    }
+                   
                 }
                 
             }
