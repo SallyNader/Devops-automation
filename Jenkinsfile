@@ -13,6 +13,7 @@ pipeline {
             steps {
                 sh """
                   cd terraform
+                  echo "$PWD"
                   terraform init
                 """
             }
