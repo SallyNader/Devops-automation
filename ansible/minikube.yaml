@@ -24,31 +24,30 @@
         - bridge-utils 
 
     - name: Enables libvirtd service  
-      ansible.builtin.service:
+      service:
         name: libvirtd
         enabled: yes
-        bacome: true
+  
 
     - name: Start libvirtd service
-       ansible.builtin.service:
+      service:
         name: libvirtd
         state: started
-        become: true   
+        
 
     - name: Add your user to the libvirt group
-      ansible.builtin.user:
+      user:
         name: ec2-user
         groups: libvirt
         append: true
-        become: true
-
+      
 
 
     - name: Restart libvirt service
-      ansible.builtin.service:
+      service:
         name: libvirtd
         state: restarted
-        become: true
+      
 
     - name: download minikube
       get_url: url='https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64' dest='{{ playbook_dir }}'    
@@ -60,7 +59,7 @@
       command: mv {{playbook_dir}}/minikube-linux-amd64 /usr/local/bin/minikube
 
     - name: download kubectl
-      get_url: url='https://storage.googleapis.com/kubernetes-release/releasev1.24.1/bin/linux/amd64/kubectl' dest='{{playbook_dir}}'
+      get_url: url='https://storage.googleapis.com/kubernetes-release/release/v1.24.1/bin/linux/amd64/kubectl' dest='{{playbook_dir}}'
 
     - name: use the chmod command to give the kubectl file executive permission
       file: dest={{playbook_dir}}/kubectl mode=a+x
@@ -68,7 +67,3 @@
     - name:  move the kubectl file to the /usr/local/bin directory
       command: mv {{playbook_dir}}/kubectl /usr/local/bin/
 
-    - name: start minikube
-      command: minikube start
-
-   
