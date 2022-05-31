@@ -14,7 +14,7 @@ pipeline {
 
         stage('terraform init') {
             steps {
-                dir("${workspace}/terraform") {
+                dir("terraform") {
                     sh """
                   
                   echo "$PWD"
@@ -29,7 +29,7 @@ pipeline {
             steps {
 
                 withCredentials([usernamePassword(credentialsId: 'aws', passwordVariable: 'aws_secret_key', usernameVariable: 'aws_access_key')]) {
-                    dir("${workspace}/terraform") {
+                    dir("terraform") {
                          sh """
                    
                     echo "$PWD"
