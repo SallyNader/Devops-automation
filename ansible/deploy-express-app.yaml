@@ -1,0 +1,22 @@
+- name: Deploy Express.js project on Linux 
+  hosts: localhost
+  tasks:
+    - name: Create Express app deployment
+      kubernetes.core.k8s:
+        state: present
+        src: IAC/nodejs-deployment.yaml
+
+    - name: Create Express app nodeType service
+      kubernetes.core.k8s:
+        state: present
+        src: IAC/nodejs-service.yaml
+
+    - name: Create Mongodb deployment
+      kubernetes.core.k8s:
+        state: present
+        src: IAC/mongodb-deployment.yaml
+
+    - name: Create Mongodb clusterIp service
+      kubernetes.core.k8s:
+        state: present
+        src: IAC/mongodb-service.yaml

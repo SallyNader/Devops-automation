@@ -27,4 +27,4 @@ spec:
       volumes:
       - name: app-volume
         hostPath:
-          path: /home/sally/Documents/k-project              
+          path: /home/ec2-user/k-project              
