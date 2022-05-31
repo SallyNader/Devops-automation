@@ -56,5 +56,5 @@ output "linux-public_ip" {
 }
 
 resource "aws_key_pair" "linux-key" {
-  public_key = file("/home/ec2-user/.ssh/id_rsa.pub")
+  public_key = file("~/.ssh/id_rsa.pub")
 }
