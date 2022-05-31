@@ -1,5 +1,5 @@
 // Runs terraform to create EC2 instance.
-pipleline {
+pipeline {
     agent any
 
     stages {
