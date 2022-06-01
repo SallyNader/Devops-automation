@@ -11,10 +11,11 @@ pipeline {
         stage("deploy") {
             steps {
                 sh """
-                    sudo scp -o StrictHostKeyChecking=no -rp -i ~/.ssh/id_rsa $WORKSPACE/kubernetes/workspace/kubernetes ec2-user@3.80.37.193:/home/ec2-user/k-project
+                echo $WORKSPACE
+                     scp -o StrictHostKeyChecking=no -rp -i ~/.ssh/id_rsa $WORKSPACE/ ec2-user@3.80.37.193:/home/ec2-user/k-project
 
                     ssh -i ~/.ssh/id_rsa ec2-user@3.80.37.193 -o StrictHostKeyChecking=no '
-                     ls -la
+                     ansible-playbook ~/k-project/kubernetes/ansible/deploy-express-app.yaml
                     '
 
                 """
