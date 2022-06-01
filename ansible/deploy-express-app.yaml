@@ -1,12 +1,6 @@
 - name: Deploy Express.js project on Linux 
   hosts: localhost
   tasks:
-    - name: create namespace 
-      kubernetes.core.k8s:
-        name: testing
-        api_version: v1
-        kind: Namespace
-        state: present
       
     - name: Create Express app deployment
       kubernetes.core.k8s:
