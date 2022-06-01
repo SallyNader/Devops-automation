@@ -15,7 +15,7 @@ pipeline {
                      scp -o StrictHostKeyChecking=no -rp -i ~/.ssh/id_rsa $WORKSPACE/ ec2-user@3.80.37.193:/home/ec2-user/k-project
 
                     ssh -i ~/.ssh/id_rsa ec2-user@3.80.37.193 -o StrictHostKeyChecking=no '
-                     ansible-playbook ~/k-project/ansible/deploy-express-app.yaml
+                     ansible-playbook ~/k-project/kubernetes/ansible/deploy-express-app.yaml
                     '
 
                 """
