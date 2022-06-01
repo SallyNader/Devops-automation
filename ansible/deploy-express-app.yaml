@@ -4,19 +4,23 @@
     - name: Create Express app deployment
       kubernetes.core.k8s:
         state: present
+        namespace: default
         src: ../kubernetes/IAC/nodejs-deployment.yaml
 
     - name: Create Express app nodeType service
       kubernetes.core.k8s:
         state: present
+        namespace: default
         src: ../kubernetes/IAC/nodejs-service.yaml
 
     - name: Create Mongodb deployment
       kubernetes.core.k8s:
         state: present
+        namespace: default
         src: ../kubernetes/IAC/mongodb-deployment.yaml
 
     - name: Create Mongodb clusterIp service
       kubernetes.core.k8s:
         state: present
+        namespace: default
         src: ../kubernetes/IAC/mongodb-service.yaml
